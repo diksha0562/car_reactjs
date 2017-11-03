@@ -1,9 +1,7 @@
 import React from 'react';
-
-
 class Trow2 extends React.Component{
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
 this.state={
     description : []
 }
@@ -30,12 +28,13 @@ for(var k in myObj1){
 return (note)
 }
 
-    render(){
-        return(
-            <div>
+render(){
+    return(
+        <div>
 {this.car_comparison()}
-                </div>
-        )
-    }
+<h1>trow2</h1>
+</div>
+    )
+}
 }
 export default Trow2;

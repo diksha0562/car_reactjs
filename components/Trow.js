@@ -1,7 +1,7 @@
 import React from 'react';
 class Trow extends React.Component{
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
 this.state={
     description : []
 }
