@@ -1,45 +1,31 @@
-import React,{Component} from 'react';
-class Trow extends Component{
+import React from 'react';
+class Trow extends React.Component{
+    constructor(props){
+        super(props);
+this.state={
+    description : []
+}
+    }
+
+func_car_desc(){
+var myObj= this.props.value;
+console.log(myObj);
+var notes= this.state.description;
+for(const i in myObj){
+    var desc =   <tr><td>{i}</td><td>{myObj[i]}</td></tr>
+    notes.push(desc) ;
+}
+return(
+    notes
+   )
+}
 
     render(){
         return(
             <div>
-            <tr>
-                <td>Car-Type</td>
-                <td>{this.props.value.car_type}</td>
-            </tr>
-            <tr>
-            <td>Price</td>
-            <td>{this.props.value.price}</td>
-        </tr>
-        <tr>
-        <td>Fuel Type</td>
-        <td>{this.props.value.fuel_type}</td>
-    </tr>
-    <tr>
-    <td>Mileage</td>
-    <td>{this.props.value.mileage}</td>
-</tr>
-<tr>
-                <td>Seating Capacity</td>
-                <td>{this.props.value.seating_capacity}</td>
-            </tr>
-            <tr>
-            <td>Transmission Type</td>
-            <td>{this.props.value.transmission_type}</td>
-        </tr>
-         <tr>
-         <td>Number of cylinders</td>
-         <td>{this.props.value.number_of_cylinders}</td>
-     </tr>
-      <tr>
-      <td>Image</td>
-      <td>{this.props.value.image}</td>
-  </tr>
-  </div>
+{this.func_car_desc()}
+</div>
         )
     }
 }
-//[{car_type : "Audi A5",price :"54.02 lakh", fuel_type : "Diesel" , mileage : "19.2kmpl" , seating_capacity : "4", transmission_type : "Automatic",number_of_cylinders : "4",image:"<img src=./images/audi_a5.jpg alt=audi>"},
-
 export default Trow;
