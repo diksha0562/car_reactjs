@@ -35,6 +35,7 @@ render(){
             <select onChange={(event)=>{this.setState({dropdown_value0:event.target.value});
             console.log(this.state.dropdown_value0);
             }}>
+                <option selected="selected"> Select your car</option>
                 <option value="0">{this.props.car_data[0].car_type}</option>
                 <option value="1">{this.props.car_data[1].car_type}</option>
                 <option value="2">{this.props.car_data[2].car_type}</option>
@@ -85,6 +86,7 @@ class Comparison extends React.Component{
                 <select onChange={(event)=>{this.setState({dropdown1_value:event.target.value});
             console.log(this.state.dropdown1_value);
             }}>
+                <option selected="selected"> Select your car</option>
                 <option value="0">{this.props.car_data[0].car_type}</option>
                 <option value="1">{this.props.car_data[1].car_type}</option>
                 <option value="2">{this.props.car_data[2].car_type}</option>
@@ -93,6 +95,7 @@ class Comparison extends React.Component{
             <select onChange={(event)=>{this.setState({dropdown2_value:event.target.value});
             console.log(this.state.dropdown2_value);
             }}>
+                <option selected="selected"> Select your car</option>
                 <option value="0">{this.props.car_data[0].car_type}</option>
                 <option value="1">{this.props.car_data[1].car_type}</option>
                 <option value="2">{this.props.car_data[2].car_type}</option>
@@ -111,38 +114,50 @@ class Table_Comparison extends React.Component{
             cardata2 : {}
         }
     }
+    componentWillUpdate(nextProps, nextState) {
+        if (nextState.open == true && this.state.open == false) {
+          this.props.onWillOpen();
+        }
+      }
     all_props(){
         let car1_data = this.props.car_data[this.props.dropdown1_value];
         let car2_data = this.props.car_data[this.props.dropdown2_value];
         this.setState({cardata1:car1_data})
-        this.setState({cardata2 : car1_data})
+        this.setState({cardata2 : car2_data})
     }
-    //   similar_props(){
-    //     let car1_data = this.props.car_data[this.props.dropdown1_value];
-    //     let car2_data = this.props.car_data[this.props.dropdown2_value];
-    //     if((car1_data!= undefined)&&(car2_data!= undefined)){
-    //         for(let i in car1_data){
-    //             car1_data= car1_data.filter(i=>car1_data[i]==car2_data[i])
-    //             }
-    //         }
-    //         this.setState({cardata1:car1_data})
-    //         this.setState({cardata2 : car1_data})
-    //     }
+      similar_props(){
+        let car1_data = this.props.car_data[this.props.dropdown1_value];
+        let car2_data = this.props.car_data[this.props.dropdown2_value];
+        let cardata1={};
+        let cardata2={};
+        if((car1_data!= undefined)&&(car2_data!= undefined)){
+            for(let i in car1_data){
+               if(car1_data[i]==car2_data[i]){
+                  cardata1[i] = car1_data[i] 
+                  cardata2[i] = car2_data[i] 
+               }
+            }
+       } 
+            this.setState({cardata1:cardata1})
+            this.setState({cardata2 :cardata2})
+        }
 
-    // different_props(){
-    //     let car1_data = this.props.car_data[this.props.dropdown1_value];
-    //     let car2_data = this.props.car_data[this.props.dropdown2_value];
-    //     let car1_data_diff = [];
-    //     let car2_data_diff = [];
-    //     if((car1_data!= undefined)&&(car2_data!= undefined)){
-    //         for(let i in car1_data){
-    //             car1_data_diff = car1_data.filter(i=>car1_data[i]!=car2_data[i])
-    //             car2_data_diff = car2_data.filter(i=>car1_data[i]!=car2_data[i])
-    //             }
-    //         }
-    //         this.setState({cardata1:car1_data_diff})
-    //         this.setState({cardata2 : car1_data_diff})
-    // }
+    different_props(){
+        let car1_data = this.props.car_data[this.props.dropdown1_value];
+        let car2_data = this.props.car_data[this.props.dropdown2_value];
+        let cardata1={};
+        let cardata2={};
+        if((car1_data!= undefined)&&(car2_data!= undefined)){
+            for(let i in car1_data){
+               if(car1_data[i]!=car2_data[i]){
+                  cardata1[i] = car1_data[i] 
+                  cardata2[i] = car2_data[i] 
+               }
+            }
+       } 
+            this.setState({cardata1:cardata1})
+            this.setState({cardata2 :cardata2})
+        }
     
     table_compare_func(){
         let car1_data = this.state.cardata1;
@@ -161,9 +176,9 @@ class Table_Comparison extends React.Component{
         return(
             <div>
                 <form>
-            <input type="radio" name="properties" onClick={this.all_props()}/>All
-            <input type="radio" name="properties"/>Similar
-            <input type="radio" name="properties" />Different
+            <input type="radio" name="properties" onClick={()=>this.all_props()}/>All
+            <input type="radio" name="properties" onClick={()=>this.similar_props()}/>Similar
+            <input type="radio" name="properties" onClick={()=>this.different_props()}/>Different
                 </form>
             {this.table_compare_func()}
             </div>
