@@ -1,0 +1,30 @@
+body {
+    text-align: center;
+    width: 100%;
+    padding: 0%;
+}
+table{
+   
+    background-color: #fff;
+    border: 1px solid rgba(10, 10, 10, 0.884);
+    border-collapse: collapse;
+    border-radius: 3px;
+    width: 60%;
+    margin : auto;
+}
+td{
+    font-weight: bold;
+    background-color: #fff;
+    border: 1px solid rgba(10, 10, 10, 0.884);
+    border-collapse: collapse;
+    border-radius: 3px;
+    padding : 5px;
+    font-family: 
+}
+.dropdown_css{
+    margin: 5px;
+}
+
+
+
+
